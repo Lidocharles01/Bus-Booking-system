@@ -1,0 +1,98 @@
+{% extends 'myapp/user_base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Hero Section -->
+<section id="hero" class="d-flex align-items-center">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1">
+        <h1 style="font-size: 60px; font-weight: 700; color: #fff; text-shadow: 2px 2px #333;">Travel in Comfort and Style</h1>
+        <h2 style="font-size: 30px; font-weight: 400; color: #fff; text-shadow: 2px 2px #333;">Book your bus tickets today!</h2>
+        <a href="#about" class="btn-get-started scrollto" style="font-size: 18px; font-weight: 600; color: #fff; border-radius: 50px; padding: 12px 25px; background-color: #dc3545; transition: background-color 0.5s ease; text-shadow: 2px 2px #333;">Get Started</a>
+        <a href="{% url 'findbus' %}" class="btn-get-started scrollto" style="font-size: 18px; font-weight: 600; color: #fff; border-radius: 50px; padding: 12px 25px; background-color: #28a745; transition: background-color 0.5s ease; text-shadow: 2px 2px #333;">Search Bus</a>
+      </div>
+    </div>
+  </div>
+
+</section><!-- End Hero -->
+<section id="about" class="about">
+  <div class="container p-5 rounded bg-light shadow">
+
+    <div class="row align-items-center">
+      <div class="col-lg-5">
+        <img src="{% static 'myapp/img/s1.jpg' %}" class="img-fluid rounded shadow" alt="">
+      </div>
+      <div class="col-lg-7 mt-5 mt-lg-0">
+        <h3 class="font-weight-bold mb-4">Why Choose Us?</h3>
+        <p class="mb-4">We offer a wide range of bus services to meet your travel needs. Our buses are comfortable, safe, and affordable. With our online booking system, you can easily book your tickets from anywhere, anytime.</p>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3"><i class="fas fa-check-circle text-danger mr-2"></i> Comfortable Seats</li>
+          <li class="mb-3"><i class="fas fa-check-circle text-danger mr-2"></i> Safe and Reliable</li>
+          <li class="mb-3"><i class="fas fa-check-circle text-danger mr-2"></i> Affordable Prices</li>
+          <li><i class="fas fa-check-circle text-danger mr-2"></i> Easy Online Booking</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<style>
+  /* Hero Section Styling */
+  #hero {
+    background: url("{% static 'myapp/img/bg2.jpg' %}") center center;
+    background-size: cover;
+    padding: 200px 0;
+    position: relative;
+  }
+
+  #hero:before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+  }
+
+  #hero h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    z-index: 1;
+  }
+
+  #hero h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 50px;
+    z-index: 1;
+  }
+
+  #hero .btn-get-started {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 50px;
+    padding: 12px 25px;
+    background-color: #dc3545;
+    transition: background-color 0.5s ease;
+    z-index: 1;
+  }
+
+  #hero .btn-get-started:hover {
+    background-color: #c82333;
+    color: #fff
+
+
+{% endblock %}

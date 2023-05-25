@@ -1,0 +1,110 @@
+{% extends 'myapp/user_base.html' %}
+
+{% block content %}
+{% load static %}
+
+<body class="section section1" style="background: url({% static 'myapp/img/bg2.jpg' %}) no-repeat top center;background-size: cover;">
+<br>
+  <div class="container my-5">
+    {% for message in messages %}
+      {% if message.tags %}
+        <div class="alert alert-danger">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="container my-5">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <div class="card-title h3 mb-0">List of Bookings</div>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <table class="table table-bordered table-striped">
+           <thead>
+  <tr class="bg-gradient bg-primary text-light">
+    <th class="p-1 text-center">BOOKING ID</th>
+    <th class="p-1 text-center">USER NAME</th>
+    <th class="p-1 text-center">BUS NAME</th>
+    <th class="p-1 text-center">SOURCE</th>
+    <th class="p-1 text-center">DESTINATION</th>
+    <th class="p-1 text-center">NUM OF SEATS</th>
+    <th class="p-1 text-center">TICKET PRICE</th>
+    <th class="p-1 text-center">DATE</th>
+    <th class="p-1 text-center">TIME</th>
+    <th class="p-1 text-center">STATUS</th>
+    <th class="p-1 text-center">ACTION</th>
+  </tr>
+</thead>
+
+{% for row in book_list %}
+  <tr>
+    <td class="px-2 py-1 align-middle">{{ row.id }}</td>
+    <td class="px-2 py-1 align-middle">{{user.username}}</td>
+    <td class="px-2 py-1 align-middle">{{ row.bus.bus_name }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.bus.busroute_set.first.source }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.bus.busroute_set.first.dest }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.nos }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.price }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.date }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.time }}</td>
+    <td class="px-2 py-1 align-middle">{{ row.status }}</td>
+    <td>
+      <form method="post" action="{% url 'cancellings' %}">
+        {% csrf_token %}
+        <input type="hidden" name="booking_id" value="{{ row.id }}">
+        <button type="submit" class="btn btn-danger p-1">CANCEL</button>
+      </form>
+    </td>
+  </tr>
+{% endfor %}
+
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="moving-words-container bg-dark">
+    <span class="moving-word" style="font-family: 'Pacifico', cursive; color: #ff6384;">Bookings</span>
+    <span class="moving-word" style="font-family: 'Indie Flower', cursive; color: #ffb400;">List</span>
+    <span class="moving-word" style="font-family: 'Montserrat', sans-serif; color: #00a8e8;">Users</span>
+    <span class="moving-word" style="font-family: 'Pacifico', cursive; color: #ff6384;">Cancel</span>
+</div>
+
+
+</body>
+<style>
+.moving-words-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background-color: #000000; /* Black background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moving-word {
+    display: inline-block;
+    margin: 0 20px;
+    animation: movingWords 10s linear infinite;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff; /* White text color */
+}
+
+@keyframes movingWords {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Indie+Flower&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}

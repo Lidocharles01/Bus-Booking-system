@@ -1,0 +1,111 @@
+{% extends 'myapp/profile.html' %}
+{% load static %}
+
+
+{% block dashboard %}
+ <div class="container my-5">
+    {% for message in messages %} {% if message.tags %}
+    <div class="alert alert-danger">{{ message }}</div>
+    {% endif %} {% endfor %}
+</div>
+<div class="container">
+    <div class="row">
+
+                <h1>My Details</h1>
+            </div>
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <input type="text" class="form-control my-1" name="firstname" id="firstname"
+                                    value="{{user.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control my-1" name="lastname" id="lastname"
+                                    value="{{user.last_name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" class="form-control my-1" name="email" id="email"
+                                    value="{{user.email}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Profile picture:</label>
+                                <input type="file" name="profile_img" id="profile_img" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Contact number:</label>
+                                <input type="number" class="form-control my-1" name="contact_number" id="contact_number"
+                                    value="{{data.contact_number}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Age:</label>
+                                <input type="number" class="form-control my-1" name="age" min="15" max="80" id="age" required value="{{data.age}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>City:</label>
+                                <input type="text" class="form-control my-1" name="city" id="city"
+                                    value="{{data.city}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Gender:</label>
+                                <select name="gender" id="gender" class="form-control my-1">
+                                    <option value="Male">Male</option>
+
+                                    {% if data.gender == "Female" %}
+                                    <option selected value="Female">Female</option>
+                                    {% else %}
+                                    <option  value="Female">Female</option>
+                                    {% endif %}
+
+                                    {% if data.gender == "Others" %}
+                                    <option selected value="Others">Others</option>
+                                    {% else %}
+                                    <option  value="Others">Others</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Occupation:</label>
+                                <input type="text" class="form-control my-1" name="occ" id="occ" value="{{data.occupation}}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>About yourself:</label>
+                                <textarea name="about" id="about" class="form-control" >{{data.about}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Save changes" class="btn btn-success my-2">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock dashboard %}

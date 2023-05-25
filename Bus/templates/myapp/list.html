@@ -1,0 +1,149 @@
+{% extends 'myapp/user_base.html' %}
+{% block content %}
+{% load static %}
+
+<body class="section section1" style="background: url({% static 'myapp/img/bg7.jpg' %}) no-repeat top center;background-size: cover;">
+
+<div class="container py-5">
+    <h3>{{msg}}</h3>
+    <div class="card rounded-0 mb-5">
+        <div class="card-header">
+            <div class="card-title h3 mb-0">List of Scheduled Busses</div>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="bg-gradient bg-primary text-light">
+                            <th class="p-1 text-center">ID</th>
+                            <th class="p-1 text-center">NAME</th>
+                            <th class="p-1 text-center">IMAGE</th>
+                            <th class="p-1 text-center">SOURCE</th>
+                            <th class="p-1 text-center">DESTINATION</th>
+                            <th class="p-1 text-center">NUM OF SEATS</th>
+                            <th class="p-1 text-center">NUM OF SEATS REM</th>
+                            <th class="p-1 text-center">PRICE</th>
+                            <th class="p-1 text-center">DATE</th>
+                            <th class="p-1 text-center">TIME</th>
+
+                            <th class="p-1 text-center">ACTION</th>
+                        </tr>
+                    </thead>
+
+                    {% for row in bus_list %}
+                    <tr>
+                        <td class="px-2 py-1 align-middle">{{row.id }}</td>
+                        <td class="px-2 py-1 align-middle">{{row.bus_name}}</td>
+                        <td class="px-2 py-1 align-middle"><img src="{{ row.image.url }}" alt="{{ row.bus_name }}" width="100" height="100"></td>
+                        <td class="px-2 py-1 align-middle">{{ row.busroute_set.first.source }}</td>
+                        <td class="px-2 py-1 align-middle">{{ row.busroute_set.first.dest }}</td>
+                        <td class="px-2 py-1 align-middle">{{row.nos}}</td>
+                        <td class="px-2 py-1 align-middle">{{row.rem}}</td>
+                        <td class="px-2 py-1 align-middle">{{ row.busroute_set.first.price }}</td>
+                        <td class="px-2 py-1 align-middle">{{row.date}}</td>
+                        <td class="px-2 py-1 align-middle">{{row.time}}</td>
+                       <td>
+   <form action="{% url 'seat_book' %}" method="GET">
+        <input type="hidden" name="bus_id" value="{{ row.id }}">
+        <button type="submit" class="btn btn-success p-1">
+            BOOK
+        </button>
+    </form>
+</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div></div></body>
+<div class="moving-words-container">
+    <span class="moving-word">Book</span>
+    <span class="moving-word">Choose</span>
+    <span class="moving-word">Select</span>
+    <span class="moving-word">Explore</span>
+    <span class="moving-word">Discover</span>
+    <span class="moving-word">Adventure</span>
+    <span class="moving-word">Journey</span>
+    <span class="moving-word">Roam</span>
+    <span class="moving-word">Escape</span>
+    <span class="moving-word">Experience</span>
+</div>
+<style>
+.moving-words-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moving-word {
+    display: inline-block;
+    margin: 0 20px;
+    animation: movingWords 10s linear infinite;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 24px;
+}
+
+.moving-word:nth-child(1) {
+    color: #ff0000; /* Red color for the first word */
+}
+
+.moving-word:nth-child(2) {
+    color: #00ff00; /* Green color for the second word */
+}
+
+.moving-word:nth-child(3) {
+    color: #0000ff; /* Blue color for the third word */
+}
+
+.moving-word:nth-child(4) {
+    color: #ff00ff; /* Magenta color for the fourth word */
+}
+
+.moving-word:nth-child(5) {
+    color: #ffa500; /* Orange color for the fifth word */
+}
+
+.moving-word:nth-child(6) {
+    color: #008000; /* Dark green color for the sixth word */
+}
+
+.moving-word:nth-child(7) {
+    color: #800080; /* Purple color for the seventh word */
+}
+
+.moving-word:nth-child(8) {
+    color: #ff1493; /* Deep pink color for the eighth word */
+}
+
+.moving-word:nth-child(9) {
+    color: #00ced1; /* Dark turquoise color for the ninth word */
+}
+
+.moving-word:nth-child(10) {
+    color: #ffd700; /* Gold color for the tenth word */
+}
+
+@keyframes movingWords {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+</style>
+
+
+{% endblock %}
+
+

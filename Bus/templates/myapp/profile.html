@@ -1,0 +1,38 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block main %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 bg-success py-5">
+      <div class="navbar navbar-dark">
+        <a href="" class="navbar-brand">
+          {% if data.profile_pic %}
+          <img src="/images/{{data.profile_pic}}" alt="" style="height: 8rem; width: 8rem; border-radius: 66px;">
+          {% else %}
+          <img src="{% static 'myapp/img/user_icon.jpg' %}" alt="" style="height: 8rem; width: 8rem; border-radius: 66px;">
+          {% endif %}
+          <p>{{user.username}}</p>
+        </a>
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{% url 'view_profile' %}" class="nav-link">View Profile</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'edit_profile' %}" class="nav-link">Edit Profile</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'change_password' %}" class="nav-link">Change Password</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      {% block dashboard %}
+
+      {% endblock dashboard %}
+    </div>
+  </div>
+</div>
+{% endblock main %}

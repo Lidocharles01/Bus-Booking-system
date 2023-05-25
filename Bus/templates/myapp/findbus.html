@@ -1,0 +1,119 @@
+{% extends 'myapp/user_base.html' %}
+
+{% block content %}
+{% load static %}
+
+<body class="section section1" style="background: url({% static 'myapp/img/bg7.jpg' %}) no-repeat top center;background-size: cover;">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                <div class="card border-0 rounded-3">
+                    <div class="card-header bg-primary text-white rounded-top">
+                        <div class="card-title h3 mb-0">Search for Bus</div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'findbus' %}" method="post" id="find-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="source" class="fw-bold text-primary">From:</label>
+                                <input name='source' class="form-control rounded-0 bg-light" type="text" id="source" value="{% if data.source %}{{data.source}}{% endif %}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="destination" class="fw-bold text-primary">To:</label>
+                                <input name='destination' id="destination" class="form-control rounded-0 bg-light" type="text" value="{% if data.destination %}{{data.destination}}{% endif %}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date" class="fw-bold text-primary">Departure Date:</label>
+                                <input name='date' id="txtDate" class="form-control rounded-0 bg-light" type="date" value="{% if data.date %}{{data.date}}{% endif %}" required>
+                            </div>
+                            {% if error %}
+                            <div class="alert alert-danger">
+                                {{error}}
+                            </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <div class="card-footer text-center bg-primary rounded-bottom">
+                        <button class="btn btn-success rounded-pill w-100" form="find-form"><i class="fas fa-search"></i> Search Bus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="moving-words">
+  <span>Travel in comfort with us!</span>
+  <span>Book your bus tickets now!</span>
+  <span>Get exciting offers on bus bookings!</span>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate= year + '-' + month + '-' + day;
+
+    $('#txtDate').attr('min', minDate);
+});
+</script>
+<style>
+ .moving-words {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #343a40;
+  color: #f8f9fa;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+}
+
+.moving-words span {
+  position: absolute;
+  left: 100%;
+  animation: move 20s infinite linear;
+}
+
+.moving-words span:nth-child(1) {
+  animation-delay: 0s;
+  color: #dc3545;
+}
+
+.moving-words span:nth-child(2) {
+  animation-delay: 6s;
+  color: #28a745;
+}
+
+.moving-words span:nth-child(3) {
+  animation-delay: 12s;
+  color: #007bff;
+}
+
+@keyframes move {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+</style>
+
+
+{% endblock %}

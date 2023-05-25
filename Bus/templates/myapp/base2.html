@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Bus</title>
+  <link rel="stylesheet" href="{% static 'myapp/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'myapp/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'myapp/css/all.min.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'myapp/img/bg2.jpg' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/0000000000.js" crossorigin="anonymous"></script>
+  <style>
+    #contact {
+      background-image: url('{% static "myapp/img/register.jpg" %}');
+      background-size: cover;
+      height: 88vh;
+      width: 100%
+    }
+
+    #contact h1 {
+      text-shadow: 2px 2px 3px rgb(211, 177, 177);
+    }
+
+    #contact #inputs input {
+      margin: 1.5rem;
+      text-align: center;
+      border: 1px solid #fff;
+      background-color: transparent;
+      border-radius: 10px;
+      box-shadow: 3px 4px 5px rgb(126, 125, 125);
+    }
+
+    #contact #inputs textarea {
+      text-align: center;
+      border: 1px solid #fff;
+      background-color: transparent;
+      border-radius: 10px;
+      box-shadow: 3px 4px 5px rgb(126, 125, 125);
+    }
+
+    #contact input::placeholder,
+    #contact #inputs textarea::placeholder {
+      color: #fff;
+    }
+
+    #hello {
+      background-image: url('{% static "myapp/img/register.jpg" %}');
+      width: 100%;
+      height: 80vh;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-attachment: fixed;
+    }
+
+    #banner-title {
+      transform: translate(14%, 120%);
+      text-shadow: 5px 5px 8px #000;
+    }
+
+    #register {
+      background-image: url('{% static "myapp/img/register.jpg" %}')
+    }
+
+    #signin {
+      background-image: url('{% static "myapp/img/register.jpg" %}')
+    }
+
+    .owl-carousel .item {
+      /* border: 1px solid black; */
+      font-size: 24px;
+      text-align: center;
+      margin-top: 20px;
+      ;
+    }
+
+    .owl-next {
+      float: right;
+    }
+
+    .owl-prev {
+      float: left;
+    }
+
+    .owl-prev span {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .owl-next span {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+  <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="{%url 'home' %}" style="color: white;">BUS WORLD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                <a class="nav-item nav-link active" href="{% url 'home' %}" style="color: white;">Home</a>
+                <a class="nav-item nav-link active" href="{% url 'aboutus' %}" style="color: white;">About-us</a>
+                 <a class="nav-item nav-link active" href="{% url 'signin' %}" style="color: white;">Signin</a>
+                 <a class="nav-item nav-link active" href="{% url 'signup' %}" style="color: white;">Signup</a>
+            </div>
+        </div>
+    </div>
+
+</nav>
+
+
+  {% block main %} {% endblock main %}
+  <script>
+    function checkuser() {
+      let un = document.getElementById("username").value;
+      // alert("hello")
+      $.ajax({
+
+        type: "get",
+        data: { usern: un },
+        success: function (data) {
+          if (data == "Exists") {
+            $("#result").html("This username already taken..!!!").addClass("text-danger");
+            $("#submitbtn").attr("disabled", "disabled");
+          } else {
+            $("#result").html("")
+            $("#submitbtn").removeAttr("disabled");
+          }
+        }
+      })
+    }
+  </script>
+  {% if status %}
+  <script>
+    alert("{{status}}")
+  </script>
+  {% endif %}
+
+  <script src="{% static 'myapp/js/jquery.js' %}"></script>
+  <script src="{% static 'myapp/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'myapp/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'myapp/js/myscript.js' %}"></script>
+  <script src="{% static 'myapp/js/all.min.js' %}"></script>
+{% block content %}
+{% endblock %}
+
+</body>
+
+</html>

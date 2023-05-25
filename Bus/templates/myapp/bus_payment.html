@@ -1,0 +1,152 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block content %}
+<section class="section section1" style="background: url({% static 'myapp/img/py.jpg' %}) no-repeat top center;background-size: cover;">
+    <div class="container">
+        <div class="payment-box">
+            <div class="payment-box-head-div">
+                <div class="payment-box-head">
+                    <h2 class="payment-box-title">PAYMENT</h2>
+                    <div class="display-td">
+                        <img class="card-img" src="{% static 'myapp/img/card.png' %}">
+                    </div>
+                </div>
+            </div>
+        <div class="card-footer">
+<script>
+    function validateForm() {
+        var cardNumber = document.getElementById("card_number").value;
+        var cvv = document.getElementById("cvv").value;
+        var cardHolderName = document.getElementById("card_holder_name").value;
+        var amount = document.getElementById("amount").value;
+        var expiryDate = document.getElementById("expiry_date").value;
+
+
+        if (amount === "") {
+            alert("Please enter an amount.");
+            return false;
+        }
+
+        if (cardNumber.length < 12 || cardNumber.length > 16) {
+            alert("Please enter a valid card number (12-16 digits).");
+            return false;
+        }
+        if (!/^[a-zA-Z]+$/.test(cardHolderName)) {
+            alert("Please enter a valid card holder name (only alphabets allowed).");
+            return false;
+        }
+
+
+        if (!/^(0[1-9]|1[0-2])\/[0-9]{4}$/.test(expiryDate))
+        {
+            alert("Please enter a valid expiry date (MM/YYYY).");
+             return false;
+        }
+
+        if (cvv.length != 3) {
+            alert("Please enter a valid CVV (3 digits).");
+            return false;
+        }
+
+
+        return true;
+    }
+</script>
+
+
+<form action="{% url 'bus_payment'%}" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="amount">Amount :</label>
+    <input type="hidden" id="amount" name="amount" value="{{ cost }}">
+    <input class="form-control" type="number" id="amount_display" value="{{ cost }}" disabled>
+
+  </div>
+  <div class="mb-3">
+    <label for="card_number" class="form-label">Card Number</label>
+    <input type="text" class="form-control rounded-0" id="card_number" name="card_number" minlength="12" maxlength="16" required>
+  </div>
+  
+  <script>
+    var cardNumber = document.getElementById("card_number");
+    cardNumber.addEventListener("input", function () {
+      this.value = this.value.replace(/[^0-9]/g, "");
+    });
+  </script>
+
+
+  <div class="mb-3">
+    <label for="card_holder_name" class="form-label">Card Holder Name</label>
+    <input type="text" class="form-control rounded-0" id="card_holder_name" name="card_holder_name" required>
+
+  </div>
+  <div class="mb-3">
+    <label for="expiry_date" class="form-label">Expiry Date</label>
+    <input type="text" class="form-control rounded-0" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" required>
+  </div>
+  <div class="mb-3">
+    <label for="cvv" class="form-label">CVV</label>
+    <input type="text" class="form-control rounded-0" id="cvv" name="cvv" minlength="3" maxlength="3" required>
+  </div>
+     <script>
+  var cardNumber = document.getElementById("cvv");
+  cvv.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+  });
+</script>
+  <div class="text-center">
+    <button type="submit" class="btn btn-danger rounded-0 col-lg-4 col-md-5 col-sm-6 col-xs-6" onclick="return validateForm()">Paynow</button>
+  </div>
+</form>
+
+        </div>
+    </div>
+</div>
+</section>
+
+
+<style>
+    .section1 {
+        background-color: #f4f4f4;
+        padding: 50px 0;
+    }
+
+   .payment-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+    .payment-box {
+        padding: 40px;
+    }
+}
+
+.payment-box-head-div {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.payment-box-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.payment-btn {
+    text-align: center;
+}
+</style>
+{% endblock %}
+

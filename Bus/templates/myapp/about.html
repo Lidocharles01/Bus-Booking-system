@@ -1,0 +1,211 @@
+{% extends 'myapp/layout.html' %}
+{% load static %}
+{% block head %}
+    <title>Terms and Conditions | Bus</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/privacy-policy.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/about.css' %}">
+    <style>
+        /* Additional styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+        .section-title {
+            font-size: 36px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .privacybanner-section {
+            background: url("{% static 'myapp/img/about-us1.jpg' %}") no-repeat center center;
+            background-size: cover;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .privacybanner-section h1 {
+            color: #fff;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px #333;
+        }
+        .section1 {
+            background: #f7f7f7;
+            padding: 60px 0;
+        }
+        .section1 h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .story-and-client {
+            background: #fff;
+            padding: 60px 0;
+        }
+        .story-and-client .story {
+            margin-bottom: 40px;
+        }
+        .story-and-client table {
+            margin-top: 20px;
+        }
+        .table td {
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        .table td:first-child {
+            font-weight: bold;
+            color: #333;
+            width: 80px;
+        }
+        .table td:last-child {
+            width: 80px;
+        }
+    </style>
+
+{% endblock head %}
+
+{% block body %}
+    <section class="privacybanner-section">
+       <center> <img  src="{% static 'myapp/img/about-us1.jpg' %}"class ="length=10" alt="Privacy Policy"></center>
+    </section>
+    <section class="section section1">
+        <div class="container">
+            <h1>We manage your trip,Book Your Bus Ticket with Us</h1>
+            <P>lido's Bus is a renowned brand in the bus operating industry. Our vision is to give a new face to the bus industry. Since our inception passenger comfort was our top priority. We have frequently added luxury buses to our huge fleet of buses. The only thing we focus on is that the comfort quotient of our passengers should never be compromised. We have always tried our best to push our limits in order to develop our travel experience. Read further to understand what we offer that enhances our reputation in the market.</P>
+            <p>Today, we make bookings without a clear idea of what our trip is going to be like - what time we’ll leave home, what time we’ll reach our destination, and how comfortable we’ll be while we get this trip. On the day of the trip, we still frantically search for a cab, get nervous when we encounter traffic, and run to the boarding gate to get there on-time.</p>
+            <p>We felt that there's got to be a better way. So, we built Blinctrip - your personal travel assistant that watches your trip experience and mindfully delivers the right information to you at the right time. That means no more running.</p>
+            <p>Our goal is to help you have a great trip each time. We’re going for it.</p>
+        </div>
+    </section>
+
+
+	<section class="story-and-client section-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="story">
+						<h2 class="section-title">
+							Our Story
+						</h2>
+						<div>
+
+						<img  src="{% static 'myapp/img/client.png' %}"class ="length=10" alt="Privacy Policy">
+					</div>
+						<p class="story-detail">
+							Ut cursus massa at urnaaculis estie. Sed aliquamellus vitae ultr condmentum leo massa mollis estiegittis miristum nulla auris quam tristique, dignissim. Morbi tempus mauris eget leo ullamcorper, et tempus risus dignissim. Proin ullamcorper eleifend est quis eleifend.
+						</p>
+					</div> <!-- /.story -->
+				</div> <!-- /.col-sm-6 -->
+				<div class="col-sm-6">
+					<div class="story">
+						<h2 class="section-title">
+							Client feedback
+						</h2>
+						<table class="table _table-bordered">
+							<tbody>
+								<tr>
+									<td>
+										5 Stars
+									</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:82%">
+												<span class="sr-only">82% Complete</span>
+											</div> <!-- /.progress-bar -->
+										</div> <!-- /.progress -->
+									</td>
+									<td>
+										82%
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										4 Stars
+									</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:90%">
+												<span class="sr-only">90% Complete</span>
+											</div> <!-- /.progress-bar -->
+										</div> <!-- /.progress -->
+									</td>
+									<td>
+										90%
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										3 Stars
+									</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:75%">
+												<span class="sr-only">75% Complete</span>
+											</div> <!-- /.progress-bar -->
+										</div> <!-- /.progress -->
+									</td>
+									<td>
+										75%
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										2 Stars
+									</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:50%">
+												<span class="sr-only">70% Complete</span>
+											</div> <!-- /.progress-bar -->
+										</div> <!-- /.progress -->
+
+									</td>
+									<td>
+										70%
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										1 Stars
+									</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:33%">
+												<span class="sr-only">33% Complete</span>
+											</div> <!-- /.progress-bar -->
+										</div> <!-- /.progress -->
+									</td>
+									<td>
+										33%
+									</td>
+								</tr>
+
+							</tbody>
+						</table> <!-- /.table -->
+					</div> <!-- /.story -->
+				</div> <!-- /.col-sm-6 -->
+			</div> <!-- /.row -->
+		</div> <!-- /.container -->
+	</section> <!-- /.story-and-client -->
+
+
+{% endblock%}

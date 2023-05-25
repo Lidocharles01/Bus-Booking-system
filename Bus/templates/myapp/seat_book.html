@@ -1,0 +1,152 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+
+{% block content %}
+<body class="section section1" style="background: url({% static 'myapp/img/seat.jpg' %}) no-repeat top center;background-size: cover;">
+<br>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-body bg-light">
+      <div class="card-header">
+        <h3 class="card-title">Booking Form</h3>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'bookings' %}" method="post" id="book-form">
+          {% csrf_token %}
+
+          <input type="hidden" name="bus_id" value="{{ request.GET.bus_id }}">
+
+          <div id="passenger-container">
+            <div class="passenger">
+              <div class="form-group">
+                <label for="passenger_name_1">Passenger Name</label>
+                <input name="passenger_name[]" class="form-control passenger-name" id="passenger_name_1" type="text" required>
+              </div>
+              <div class="form-group">
+                <label for="passenger_age_1">Passenger Age</label>
+                <input name="passenger_age[]" class="form-control passenger-age" id="passenger_age_1" type="number" min="0" required>
+              </div>
+              <div class="form-group">
+                <label for="passenger_gender_1">Passenger Gender</label>
+                <select name="passenger_gender[]" class="form-control passenger-gender" id="passenger_gender_1" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="no_seats">Number of Seats</label>
+            <input name="no_seats" class="form-control" id="no_seats" type="number" min="1" readonly>
+          </div>
+
+          {% if error %}
+            <div class="alert alert-danger">
+              {{ error }}
+            </div>
+          {% endif %}
+
+          <button class="btn btn-primary" id="add-passenger-btn">Add Passenger</button>
+          <button class="btn btn-primary" type="submit">Book Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  updateSeatCount(); // Update seat count on page load
+
+  $('#book-form').submit(function(event) {
+    var no_seats = parseInt($('#no_seats').val());
+    var num_passengers = $('.passenger').length;
+
+    if (num_passengers !== no_seats) {
+      alert("Number of seats and number of passengers must match.");
+      event.preventDefault();
+    }
+  });
+
+  $('#add-passenger-btn').click(function(event) {
+    event.preventDefault();
+
+    var passengerCount = $('.passenger').length;
+    var newPassengerCount = passengerCount + 1;
+
+    var passengerHTML = `
+      <div class="passenger">
+        <div class="form-group">
+          <label for="passenger_name_${newPassengerCount}">Passenger Name</label>
+          <input name="passenger_name[]" class="form-control passenger-name" id="passenger_name_${newPassengerCount}" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="passenger_age_${newPassengerCount}">Passenger Age</label>
+          <input name="passenger_age[]" class="form-control passenger-age" id="passenger_age_${newPassengerCount}" type="number" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="passenger_gender_${newPassengerCount}">Passenger Gender</label>
+          <select name="passenger_gender[]" class="form-control passenger-gender" id="passenger_gender_${newPassengerCount}" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>`;
+
+    $('#passenger-container').append(passengerHTML);
+    updateSeatCount(); // Update seat count after adding a new passenger
+  });
+
+  function updateSeatCount() {
+    var num_passengers = $('.passenger').length;
+    $('#no_seats').val(num_passengers); // Update the seat count input field
+  }
+});
+</script>
+
+
+
+</body>
+
+<style>
+.moving-words-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    background-color: #000000; /* Black background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moving-word {
+    display: inline-block;
+    margin: 0 20px;
+    animation: movingWords 10s linear infinite;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff; /* White text color */
+}
+
+@keyframes movingWords {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+</style>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Indie+Flower&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
+{% endblock %}

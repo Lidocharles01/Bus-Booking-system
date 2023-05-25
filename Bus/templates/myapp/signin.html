@@ -1,0 +1,76 @@
+{% extends 'myapp/base2.html' %}
+{% load static %}
+
+{% block main %}
+<br>
+<br>
+<br>
+<br>
+
+<body class="section section1" style="background: url({% static 'myapp/img/register.jpg' %}) no-repeat top center;background-size: cover;">
+
+<center>
+  <div class="container my-5">
+    {% for message in messages %} {% if message.tags %}
+    <div class="alert alert-danger">{{ message }}</div>
+    {% endif %} {% endfor %}
+</div>
+
+    <div class="container bg-secondary mt-5" id="form-div" style="width:30%;height:400px;background-image:url({% static './myapp/images/' %})">
+     <h2><font color="white">User Login</font></h2>
+        <!--<img src="{% static 'myapp/images/person.png'%}" width="150" height="150">-->
+    <div class="container mt-5" >
+        <form role="form" name="form1" action="{% url 'signin' %}"  method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                 <form action="{% url 'signin' %}" method="POST">
+                {% csrf_token %}
+                <div class="inner-card">
+                    <input type="text" name="username" placeholder="username" id="username" class="form-control ms-0">
+                    <input type="password" name="pass1" placeholder="Password" id="pass1" class="form-control ms-0">
+                    <input type="submit" value="Login" class="btn btn-primary ms-0">
+                </div>
+            </form>
+            <br/>
+                <button type="reset" class="btn btn-danger" id="rt" name="rt">Reset</button>
+                <button type="button" class="btn btn-success p-1">
+    <a href="{% url 'signup' %}" style="color: white; text-decoration: none;">New User</a>
+  </button></div></form>
+    {{msg}}
+    </div>
+        </div>
+</center>
+
+<style>
+body {
+  background: url("{% static 'myapp/images/ck.jpg'%}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+ #form-div{
+width:500px;
+height:400px;
+background:linear-gradient(white,grey);
+border-radius:8px;
+margin-top:30px;
+padding: 50px 0 0 0;
+box-shadow: 7px 3px 5px -2px #1a0000;
+
+}
+input{
+border: none;
+border-radius: 6px;
+width: 286px;
+margin: 20px 0 0 0;
+height: 35px;
+outline:none;
+font-size:15px;
+font-family:monospace;
+
+}
+</style>
+</body>
+{% endblock %}
